@@ -20,4 +20,16 @@ class CartPrefrence {
         .map((item) => json.decode(item) as Map<String, dynamic>)
         .toList();
   }
+
+  static Future<void> removeFromCart(String productId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> cart = prefs.getStringList("cart") ?? [];
+
+    cart.removeWhere((item) {
+      Map<String, dynamic> product = json.decode(item);
+      return product['id'].toString() == productId;
+    });
+
+    prefs.setStringList('cart', cart);
+  }
 }

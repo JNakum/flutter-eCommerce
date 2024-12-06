@@ -66,6 +66,10 @@ class _CategoriesListState extends State<CategoriesList> {
                       const SizedBox(
                         height: 8,
                       ),
+                      Text("Product Id :- ${product["id"].toString()}"),
+                      const SizedBox(
+                        height: 5,
+                      ),
                       Text(
                         product["name"]!,
                         maxLines: 1,
@@ -84,25 +88,6 @@ class _CategoriesListState extends State<CategoriesList> {
                       ),
                       const SizedBox(
                         height: 4,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ProductDetail(product: product)));
-                                },
-                                child: const Text(
-                                  "View Product",
-                                  textAlign: TextAlign.center,
-                                )),
-                          ),
-                        ],
                       ),
                     ],
                   ),

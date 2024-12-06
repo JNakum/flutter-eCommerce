@@ -55,7 +55,11 @@ class _ProductDetailState extends State<ProductDetail> {
                       ),
                     ),
                     const SizedBox(
-                      height: 8,
+                      height: 18,
+                    ),
+                    Text("Product Id :- ${widget.product['id'].toString()}"),
+                    const SizedBox(
+                      height: 5,
                     ),
                     Text(
                       widget.product['name']!,
