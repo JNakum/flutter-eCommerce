@@ -26,21 +26,21 @@ class _CategoryState extends State<Category> {
         'id': 1,
         'name':
             'Brown Shirt sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',
-        'price': '\$49.99',
+        'price': 40.00,
         'image':
             'https://images.pexels.com/photos/1036627/pexels-photo-1036627.jpeg',
       },
       {
         'id': 2,
         'name': 'Blue Jeans',
-        'price': '\$39.99',
+        'price': 39.99,
         'image':
             'https://images.pexels.com/photos/1036627/pexels-photo-1036627.jpeg',
       },
       {
         'id': 3,
         'name': 'Blue T-shirts',
-        'price': '\$89.99',
+        'price': 89.99,
         'image':
             'https://images.pexels.com/photos/1036627/pexels-photo-1036627.jpeg',
       },
@@ -49,21 +49,21 @@ class _CategoryState extends State<Category> {
       {
         'id': 4,
         'name': 'Red Dress',
-        'price': '\$59.99',
+        'price': 59.99,
         'image':
             'https://images.pexels.com/photos/871495/pexels-photo-871495.jpeg',
       },
       {
         'id': 5,
         'name': 'Black Skirt',
-        'price': '\$39.99',
+        'price': 39.99,
         'image':
             'https://images.pexels.com/photos/871495/pexels-photo-871495.jpeg',
       },
       {
         'id': 6,
         'name': 'Black T-shirts',
-        'price': '\$39.99',
+        'price': 39.99,
         'image':
             'https://images.pexels.com/photos/871495/pexels-photo-871495.jpeg',
       },
@@ -72,21 +72,21 @@ class _CategoryState extends State<Category> {
       {
         'id': 7,
         'name': 'Kids T-Shirt',
-        'price': '\$19.99',
+        'price': 19.99,
         'image':
             'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg',
       },
       {
         'id': 8,
         'name': 'Children Shorts',
-        'price': '\$25.99',
+        'price': 25.99,
         'image':
             'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg',
       },
       {
         'id': 9,
         'name': 'Children Dresses',
-        'price': '\$35.99',
+        'price': 35.999999999,
         'image':
             'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg',
       },

@@ -1,8 +1,10 @@
 import 'dart:developer';
+
 import 'package:ecommerce/pages/bottom/cart.dart';
+import 'package:ecommerce/provider/cartprovider.dart';
 import 'package:ecommerce/utils/color.dart';
-import 'package:ecommerce/utils/cartprefrence.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart'; // Import provider package
 
 class ProductDetail extends StatefulWidget {
   final Map<String, dynamic> product;
@@ -30,8 +32,31 @@ class _ProductDetailState extends State<ProductDetail> {
                   MaterialPageRoute(builder: (context) => const Cart()),
                 );
               },
-              icon: const Icon(Icons.shopping_bag),
-              color: colorPrimaryDark,
+              icon: Stack(
+                children: [
+                  const Icon(Icons.shopping_bag, color: colorPrimaryDark),
+                  if (Provider.of<CartProvider>(context).cartCount > 0)
+                    Positioned(
+                      right: 0,
+                      top: 0,
+                      child: Container(
+                        padding: const EdgeInsets.all(3),
+                        decoration: const BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Text(
+                          '${Provider.of<CartProvider>(context).cartCount}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
             ),
           ),
         ],
@@ -74,7 +99,7 @@ class _ProductDetailState extends State<ProductDetail> {
                       height: 8,
                     ),
                     Text(
-                      widget.product["price"]!,
+                      widget.product["price"].toString(),
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -112,7 +137,7 @@ class _ProductDetailState extends State<ProductDetail> {
               children: [
                 Expanded(
                   child: Text(
-                    "${widget.product['price']!}\nUnit Price",
+                    "${widget.product['price'].toString()}\nUnit Price",
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -137,10 +162,11 @@ class _ProductDetailState extends State<ProductDetail> {
                   width: 10,
                 ),
                 ElevatedButton(
-                  onPressed: () async {
+                  onPressed: () {
+                    // Use the CartProvider to add the product to the cart
                     log("Add to Cart Button Press");
-
-                    await CartPrefrence.addToCart(widget.product);
+                    Provider.of<CartProvider>(context, listen: false)
+                        .addToCart(widget.product);
 
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Added to Cart')),

@@ -81,7 +81,7 @@ class _CategoriesListState extends State<CategoriesList> {
                         height: 4,
                       ),
                       Text(
-                        product['price']!,
+                        product['price'].toStringAsFixed(2)!,
                         style: const TextStyle(
                           fontSize: 14,
                         ),
