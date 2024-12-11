@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class MyImage extends StatelessWidget {
-  double height;
-  double width;
+  double? height, width;
   String imagePath;
   Color? color;
   var fit;
@@ -11,8 +10,8 @@ class MyImage extends StatelessWidget {
 
   MyImage(
       {super.key,
-      required this.height,
-      required this.width,
+      this.height,
+      this.width,
       required this.imagePath,
       this.color,
       this.fit,

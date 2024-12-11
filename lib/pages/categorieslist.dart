@@ -1,5 +1,7 @@
 import 'package:ecommerce/pages/productdetail.dart';
 import 'package:ecommerce/utils/color.dart';
+import 'package:ecommerce/utils/priceformate.dart';
+import 'package:ecommerce/widget/mynetworkimage.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesList extends StatefulWidget {
@@ -56,11 +58,10 @@ class _CategoriesListState extends State<CategoriesList> {
                         flex: 3,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8),
-                          child: Image.network(
-                            product['image']!,
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                          ),
+                          child: MyNetworkImage(
+                              imageUrl: product['image']!,
+                              fit: BoxFit.cover,
+                              imgWidth: double.infinity),
                         ),
                       ),
                       const SizedBox(
@@ -81,7 +82,8 @@ class _CategoriesListState extends State<CategoriesList> {
                         height: 4,
                       ),
                       Text(
-                        product['price'].toStringAsFixed(2)!,
+                        PriceFormate(product['price']!),
+                        // product['price'].toStringAsFixed(2)!,
                         style: const TextStyle(
                           fontSize: 14,
                         ),

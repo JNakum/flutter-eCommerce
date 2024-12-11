@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:ecommerce/provider/cartprovider.dart';
 import 'package:ecommerce/utils/color.dart';
+import 'package:ecommerce/utils/priceformate.dart';
+import 'package:ecommerce/widget/mynetworkimage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart'; // Import provider package
 
@@ -17,7 +19,7 @@ class _CartState extends State<Cart> {
   Widget build(BuildContext context) {
     // Get the cart provider instance
     var cartProvider = Provider.of<CartProvider>(context);
-    List<Map<String, dynamic>> _cart = cartProvider.cartItems;
+    List<Map<String, dynamic>> cart = cartProvider.cartItems;
 
     return Scaffold(
       appBar: AppBar(
@@ -28,14 +30,14 @@ class _CartState extends State<Cart> {
       body: Column(
         children: [
           Expanded(
-            child: _cart.isEmpty
+            child: cart.isEmpty
                 ? const Center(
                     child: Text("Your Cart Is Empty"),
                   )
                 : ListView.builder(
-                    itemCount: _cart.length,
+                    itemCount: cart.length,
                     itemBuilder: (context, index) {
-                      Map<String, dynamic> product = _cart[index];
+                      Map<String, dynamic> product = cart[index];
                       return Card(
                         margin: const EdgeInsets.all(10),
                         shape: RoundedRectangleBorder(
@@ -48,12 +50,17 @@ class _CartState extends State<Cart> {
                             children: [
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(8),
-                                child: Image.network(
-                                  product['image']!,
-                                  width: 80,
-                                  height: 90,
-                                  fit: BoxFit.cover,
-                                ),
+                                child: MyNetworkImage(
+                                    imageUrl: product['image']!,
+                                    imgHeight: 80,
+                                    imgWidth: 90,
+                                    fit: BoxFit.cover),
+                                //     Image.network(
+                                //   product['image']!,
+                                //   width: 80,
+                                //   height: 90,
+                                //   fit: BoxFit.cover,
+                                // ),
                               ),
                               const SizedBox(width: 10),
                               Expanded(
@@ -144,7 +151,9 @@ class _CartState extends State<Cart> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Total: \$${cartProvider.totalAmount.toStringAsFixed(2)}",
+                  // "Total: \$${cartProvider.totalAmount.toStringAsFixed(2)}",
+                  "Total: ${PriceFormate(cartProvider.totalAmount)}",
+
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,

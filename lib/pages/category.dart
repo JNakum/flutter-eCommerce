@@ -1,5 +1,6 @@
 import 'package:ecommerce/pages/categorieslist.dart';
 import 'package:ecommerce/utils/color.dart';
+import 'package:ecommerce/widget/myimage.dart';
 import 'package:flutter/material.dart';
 
 class Category extends StatefulWidget {
@@ -11,13 +12,9 @@ class Category extends StatefulWidget {
 
 class _CategoryState extends State<Category> {
   final List<Map<String, dynamic>> categories = [
-    {"id": 1, "name": "Mens Clothing", "image": "assets/images/mens.jpg"},
-    {"id": 2, "name": "Womens Clothing", "image": "assets/images/womens.jpg"},
-    {
-      "id": 3,
-      "name": "Children Clothing",
-      "image": "assets/images/children.jpg"
-    },
+    {"id": 1, "name": "Mens Clothing", "image": "mens.jpg"},
+    {"id": 2, "name": "Womens Clothing", "image": "womens.jpg"},
+    {"id": 3, "name": "Children Clothing", "image": "children.jpg"},
   ];
 
   final Map<int, List<Map<String, dynamic>>> categoryProducts = {
@@ -86,7 +83,7 @@ class _CategoryState extends State<Category> {
       {
         'id': 9,
         'name': 'Children Dresses',
-        'price': 35.999999999,
+        'price': 35.99,
         'image':
             'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg',
       },
@@ -135,14 +132,15 @@ class _CategoryState extends State<Category> {
                   children: [
                     // Image section
                     Expanded(
-                      child: ClipRRect(
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(10),
-                        ),
-                        child: Image.asset(
-                          categories[index]["image"]!,
-                          fit: BoxFit.fill,
-                        ),
+                      child:
+                          // Image.asset(
+                          //   categories[index]['image']!,
+                          //   fit: BoxFit.fill,
+                          // ),
+                          MyImage(
+                        imagePath: categories[index]["image"]!,
+                        radius: 0,
+                        fit: BoxFit.fill,
                       ),
                     ),
                     // Name section

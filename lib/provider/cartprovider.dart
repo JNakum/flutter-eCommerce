@@ -22,6 +22,11 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  // Function to check if product is already in cart
+  bool isProductInCart(String productId) {
+    return _cartItems.any((item) => item['id'].toString() == productId);
+  }
+
   // Update product quantity (increment or decrement)
   void updateProductQuantity(Map<String, dynamic> product, bool isIncrement) {
     final index = _cartItems.indexOf(product);

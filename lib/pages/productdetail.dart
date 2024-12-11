@@ -1,8 +1,8 @@
 import 'dart:developer';
-
 import 'package:ecommerce/pages/bottom/cart.dart';
 import 'package:ecommerce/provider/cartprovider.dart';
 import 'package:ecommerce/utils/color.dart';
+import 'package:ecommerce/widget/mynetworkimage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart'; // Import provider package
 
@@ -17,6 +17,17 @@ class ProductDetail extends StatefulWidget {
 class _ProductDetailState extends State<ProductDetail> {
   @override
   Widget build(BuildContext context) {
+    // bool isInCart = Provider.of<CartProvider>(context)
+    //     .isProductInCart(widget.product['id'].toString());
+    // log("This is The add item in cart data => ${isInCart.toString()}");
+
+    // CartProvider ka instance
+    final cartProvider = Provider.of<CartProvider>(context);
+
+    // Product cart me hai ya nahi
+    bool isInCart =
+        cartProvider.isProductInCart(widget.product['id'].toString());
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.product['name']!),
@@ -72,12 +83,18 @@ class _ProductDetailState extends State<ProductDetail> {
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.network(
-                        widget.product['image']!,
+                      child: MyNetworkImage(
+                        imageUrl: widget.product['image']!,
                         fit: BoxFit.cover,
-                        width: double.infinity,
-                        height: 300,
+                        imgWidth: double.infinity,
+                        imgHeight: 300,
                       ),
+                      //     Image.network(
+                      //   widget.product['image']!,
+                      //   fit: BoxFit.cover,
+                      //   width: double.infinity,
+                      //   height: 300,
+                      // ),
                     ),
                     const SizedBox(
                       height: 18,
@@ -145,19 +162,19 @@ class _ProductDetailState extends State<ProductDetail> {
                     ),
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Buy Button Action
-                    log("Buy Button Press");
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 12,
-                      horizontal: 24,
-                    ),
-                  ),
-                  child: const Text("Buy Now"),
-                ),
+                // ElevatedButton(
+                //   onPressed: () {
+                //     // Buy Button Action
+                //     log("Buy Button Press");
+                //   },
+                //   style: ElevatedButton.styleFrom(
+                //     padding: const EdgeInsets.symmetric(
+                //       vertical: 12,
+                //       horizontal: 24,
+                //     ),
+                //   ),
+                //   child: const Text("Buy Now"),
+                // ),
                 const SizedBox(
                   width: 10,
                 ),
@@ -165,12 +182,22 @@ class _ProductDetailState extends State<ProductDetail> {
                   onPressed: () {
                     // Use the CartProvider to add the product to the cart
                     log("Add to Cart Button Press");
-                    Provider.of<CartProvider>(context, listen: false)
-                        .addToCart(widget.product);
+                    if (isInCart) {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (ctx) => const Cart()));
+                    } else {
+                      Provider.of<CartProvider>(context, listen: false)
+                          .addToCart(widget.product);
+                      setState(() {});
 
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Added to Cart')),
-                    );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Added to Cart'),
+                          behavior: SnackBarBehavior.floating,
+                          showCloseIcon: true,
+                        ),
+                      );
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
@@ -178,7 +205,7 @@ class _ProductDetailState extends State<ProductDetail> {
                       horizontal: 24,
                     ),
                   ),
-                  child: const Text("Add To Cart"),
+                  child: Text(isInCart ? "Go to Cart" : "Add To Cart"),
                 ),
               ],
             ),
